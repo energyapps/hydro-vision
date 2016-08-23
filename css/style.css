@@ -73,7 +73,7 @@ Legend
 }
 
 .my-legend .legend-scale ul li.activea {
-  background-color: rgb(184,223,101);
+  background-color: #ADD8E6;
   /*transition: background-color 100ms ease-out;*/
 }
 
@@ -254,7 +254,7 @@ Legend
 }
 
 .bubbles :hover, .bubbles2 :hover, .bubbles3 :hover {
-  stroke: #ffb732;
+  stroke: #ADD8E6;
   stroke-width: 3px;
   /*fill: #ff5614;*/
   cursor: pointer;
