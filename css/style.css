@@ -68,12 +68,12 @@ Legend
   }
 
 .my-legend .legend-scale ul li:hover {
-  background-color: rgb(184,223,101);
+  background-color: rgb(232,128,71);
   /*transition: background-color 100ms ease-out;*/
 }
 
 .my-legend .legend-scale ul li.activea {
-  background-color: #ADD8E6;
+  background-color: rgb(47,169,219);
   /*transition: background-color 100ms ease-out;*/
 }
 
@@ -254,7 +254,7 @@ Legend
 }
 
 .bubbles :hover, .bubbles2 :hover, .bubbles3 :hover {
-  stroke: #ADD8E6;
+  stroke: rgb(233,143,89);
   stroke-width: 3px;
   /*fill: #ff5614;*/
   cursor: pointer;
@@ -265,7 +265,7 @@ Legend
 }
 
 .negB {
-  fill: #ADD8E6;
+  fill: rgb(47,169,219);
 }
 
 .legend circle {
@@ -370,15 +370,15 @@ cursor: pointer;
 }
 
 #totalDiv h2 {
-  font-size: 20px;
+  font-size: 15px;
   padding-top: 5px;
   padding-right: 5px;
   color: #333;
-  line-height: 30px;
+  line-height: 15px;
 }
 
 #totalDiv h3 {
-  font-size: 30px;
+  font-size: 15px;
   padding-top: 5px;
   padding-right: 5px;
   color: #333;

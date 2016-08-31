@@ -1,3 +1,80 @@
+var labels = [
+  {
+    "id": "NORW",
+    "name": "Northwest (WECC subregion)"
+  },
+  {
+    "id": "CALN",
+    "name": "California-North (WECC subregion)"
+  },
+  {
+    "id": "CALS",
+    "name": "California-South (WECC subregion)"
+  },
+  {
+    "id": "BASN",
+    "name": "Basin (WECC subregion)"
+  },
+  {
+    "id": "DSW",
+    "name": "Desert Southwest (WECC subregion)"
+  },
+  {
+    "id": "MAPP",
+    "name": "Mid-Continent Area Power Pool"
+  },
+  {
+    "id": "ROCK",
+    "name": "Rockies (WECC subregion)"
+  },
+  {
+    "id": "SPP",
+    "name": "Southwest Power Pool"
+  },
+  {
+    "id": "MISO-US",
+    "name": "Midwest Independent Transmission System Operator"
+  },
+  {
+    "id": "ERCOT",
+    "name": "Electric Reliability Council of Texas"
+  },
+  {
+    "id": "PJM",
+    "name": "PJM Interconnection"
+  },
+  {
+    "id": "SERC-W",
+    "name": "SERC Reliability Corporation West"
+  },
+  {
+    "id": "SERC-SE",
+    "name": "SERC Reliability Corporation South East"
+  },
+  {
+    "id": "SERC-N",
+    "name": "SERC Reliability Corporation North"
+  },
+  {
+    "id": "SERC-E",
+    "name": "SERC Reliability Corporation East"
+  },
+  {
+    "id": "FRCC",
+    "name": "Florida Reliability Coordinating Council"
+  },
+  {
+    "id": "NYISO",
+    "name": "New York Independent System Operator"
+  },
+  {
+    "id": "ISO-NE",
+    "name": "ISO New England, Inc."
+  }
+]
+
+console.log(labels)
+
 var ø = 0;
 
 var redata = ["nerc2010","nerc2020","nerc2030","nerc2040","nerc2050"];
@@ -205,9 +282,9 @@ d3.json("js/nerc_topo3.json", function(error, us) {
 		else if (gotype == "50") { var k = 4; var gotypename = "2050"; var total = 57.76;};
 
 			if (gotypename < 2020) {
-				totalDiv.innerHTML = '<h2>Total PSH Installed: ' + total + ' GW</h2>';			
+				totalDiv.innerHTML = '<h3>United States</h3><h2>Total PSH Installed: ' + total + ' GW</h2>';			
 			} else {
-				totalDiv.innerHTML = '<h2>Total PSH Projected: ' + total + ' GW</h2>';			
+				totalDiv.innerHTML = '<h3>United States</h3><h2>Total PSH Projected: ' + total + ' GW</h2>';			
 			};
 			
 			// redifine the radius of circles
@@ -258,7 +335,12 @@ svg.append("g")
 	function hoverdata(d) { 
 
 
-		var namew = d.properties.name;
+		for (var π = labels.length - 1; π >= 0; π--) {
+			if (labels[π].id === d.properties.name) {
+				var namew = labels[π].name;				
+			};
+		};
+		
 		var gotypename = redata[i].slice(4,8);
 		var regiontotal = Math.round(d.properties[redata[i]]*100) / 100;
 

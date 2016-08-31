@@ -1,6 +1,83 @@
+var labels = [
+  {
+    "id": "NORW",
+    "name": "Northwest (WECC subregion)"
+  },
+  {
+    "id": "CALN",
+    "name": "California-North (WECC subregion)"
+  },
+  {
+    "id": "CALS",
+    "name": "California-South (WECC subregion)"
+  },
+  {
+    "id": "BASN",
+    "name": "Basin (WECC subregion)"
+  },
+  {
+    "id": "DSW",
+    "name": "Desert Southwest (WECC subregion)"
+  },
+  {
+    "id": "MAPP",
+    "name": "Mid-Continent Area Power Pool"
+  },
+  {
+    "id": "ROCK",
+    "name": "Rockies (WECC subregion)"
+  },
+  {
+    "id": "SPP",
+    "name": "Southwest Power Pool"
+  },
+  {
+    "id": "MISO-US",
+    "name": "Midwest Independent Transmission System Operator"
+  },
+  {
+    "id": "ERCOT",
+    "name": "Electric Reliability Council of Texas"
+  },
+  {
+    "id": "PJM",
+    "name": "PJM Interconnection"
+  },
+  {
+    "id": "SERC-W",
+    "name": "SERC Reliability Corporation West"
+  },
+  {
+    "id": "SERC-SE",
+    "name": "SERC Reliability Corporation South East"
+  },
+  {
+    "id": "SERC-N",
+    "name": "SERC Reliability Corporation North"
+  },
+  {
+    "id": "SERC-E",
+    "name": "SERC Reliability Corporation East"
+  },
+  {
+    "id": "FRCC",
+    "name": "Florida Reliability Coordinating Council"
+  },
+  {
+    "id": "NYISO",
+    "name": "New York Independent System Operator"
+  },
+  {
+    "id": "ISO-NE",
+    "name": "ISO New England, Inc."
+  }
+]
+
+console.log(labels)
+
 var ø = 0;
 
-var redata = ["nerc2010","nerc2016","nerc2020","nerc2030","nerc2040","nerc2050"];
+var redata = ["nerc2010","nerc2020","nerc2030","nerc2040","nerc2050"];
 var totalDiv = document.getElementById('totalDiv')
 var boxWidth = 40;
 
@@ -58,7 +135,6 @@ d3.json("js/nerc_topo3.json", function(error, us) {
 			$(this).addClass('activea');
 			i =  Number($(this).attr("idnum"));
 			BuildBubbles(width);
-			console.log("you selected the year, at index: " + i)
 			// console.log("this is m: " + m)
 		});	
 
@@ -171,7 +247,7 @@ d3.json("js/nerc_topo3.json", function(error, us) {
 		  legendText.append("tspan")
 		  	.text("In Gigawatts (GW)")
 		  	.attr("x",0)
-	      .attr("y",25);
+	      .attr("y",30);
 
 			/////////////end the legend creation //////////////////
 
@@ -199,18 +275,16 @@ d3.json("js/nerc_topo3.json", function(error, us) {
 			var gotype = $('.activea').attr('datayear');
 
 		     if (gotype == "10") { var k = 0; var gotypename = "2010"; var total = 22.24;} 
-		else if (gotype == "16") { var k = 1; var gotypename = "2016"; var total = 22.24;} 
-		else if (gotype == "20") { var k = 2; var gotypename = "2020"; var total = 22.30;} 
-		else if (gotype == "30") { var k = 3; var gotypename = "2030"; var total = 38.49;} 
-		else if (gotype == "40") { var k = 4; var gotypename = "2040"; var total = 48.91;} 
-		else if (gotype == "50") { var k = 5; var gotypename = "2050"; var total = 57.76;};
+		// else if (gotype == "16") { var k = 1; var gotypename = "2016"; var total = 22.24;} 
+		else if (gotype == "20") { var k = 1; var gotypename = "2020"; var total = 22.30;} 
+		else if (gotype == "30") { var k = 2; var gotypename = "2030"; var total = 38.49;} 
+		else if (gotype == "40") { var k = 3; var gotypename = "2040"; var total = 48.91;} 
+		else if (gotype == "50") { var k = 4; var gotypename = "2050"; var total = 57.76;};
 
-			if (gotypename === "2010") {
-				totalDiv.innerHTML = '<h2>Total PSH Installed in ' + gotypename + '</h2><h3>' + total + 'GW</h3>';			
-			} else if (gotypename < 2020) {
-				totalDiv.innerHTML = '<h2>Total PSH Installed in ' + gotypename + '</h2><h3>' + total + 'GW</h3>';			
+			if (gotypename < 2020) {
+				totalDiv.innerHTML = '<h3>United States</h3><h2>Total PSH Installed: ' + total + ' GW</h2>';			
 			} else {
-				totalDiv.innerHTML = '<h2>Total PSH Projected in ' + gotypename + '</h2><h3>' + total + 'GW</h3>';		
+				totalDiv.innerHTML = '<h3>United States</h3><h2>Total PSH Projected: ' + total + ' GW</h2>';			
 			};
 			
 			// redifine the radius of circles
@@ -261,22 +335,25 @@ svg.append("g")
 	function hoverdata(d) { 
 
 
-		var namew = d.properties.name;
+		for (var π = labels.length - 1; π >= 0; π--) {
+			if (labels[π].id === d.properties.name) {
+				var namew = labels[π].name;				
+			};
+		};
+		
 		var gotypename = redata[i].slice(4,8);
 		var regiontotal = Math.round(d.properties[redata[i]]*100) / 100;
 
-		if (gotypename === "2010") {
-				totalDiv.innerHTML = '<h2>PSH Installed in ' + namew + ' in ' + gotypename + '</h2><h3>' + regiontotal + 'GW</h3>';			
-			} else if (gotypename < 2020) {
-				totalDiv.innerHTML = '<h2>PSH Installed in ' + namew + ' in ' + gotypename + '</h2><h3>' + regiontotal + 'GW</h3>';			
+		if (gotypename < 2020) {
+				totalDiv.innerHTML = '<h3>' +namew + '</h3><h2>PSH Installed in ' + gotypename + ": " + regiontotal + 'GW</h2>';			
 			} else {
-				totalDiv.innerHTML = '<h2>PSH Projected in ' + namew + ' in ' + gotypename + '</h2><h3>' + regiontotal + 'GW</h3>';		
+				totalDiv.innerHTML = '<h3>' +namew + '</h3><h2>PSH Projected in ' + gotypename + ": " + regiontotal + 'GW</h2>';			
 			};
 	}
 		
 
 		// begin looping stuff
-		var num	= 5; //number of iterations, i.e. years		
+		var num	= 4; //number of iterations, i.e. years		
 		var i = 0; // which year you are on when you start 
 		var play;
 
